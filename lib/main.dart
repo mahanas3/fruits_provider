@@ -1,7 +1,5 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:fruits_provider/screens/home.dart';
+import 'package:fruits_provider/screens/product_list.dart';
 import 'package:fruits_provider/screens/cartProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,9 +14,9 @@ class Main extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: ProductList(),
     );
   }
 }

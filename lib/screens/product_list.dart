@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_provider/screens/cart.dart';
+import 'package:fruits_provider/screens/cartProvider.dart';
+import 'package:provider/provider.dart';
+import 'package:badges/badges.dart' as  badges;
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+import 'cart.dart';
+
+class ProductList extends StatefulWidget {
+  const ProductList({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<ProductList> createState() => _ProductListState();
 }
 
-class _HomeState extends State<Home> {
+class _ProductListState extends State<ProductList> {
   List<String> ProductName = [
     'Apple',
     'Mango',
@@ -21,16 +25,16 @@ class _HomeState extends State<Home> {
 
   List<String> ProductWeight = ['Kg', 'Doz', 'Doz', 'Kg', 'Kg', 'Pc', 'Doz'];
 
-  List<int> ProductPrice = [100, 100, 50, 70, 30, 200, 50];
+  List<String> ProductPrice = ['100', '100', '150', '120', '30', '200', '110'];
 
   List<String> ProductImages = [
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6EDX1rf6co7ibu2jBqWrW9EXsb8dG51VCwA&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdnlsncXm-IPn6h6P0E4hwPFg4RyFF9A17Aw&usqp=CAU',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8OdF8KvgvksFVMdkPzrVZIDZXvme1maA0ig&usqp=CAU',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZWfDy8Sim_edvBBamEmKYfy0_DGE4cpBZlQ&usqp=CAU',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR83zQMXwMS3ormYNUpdmYWlBn_Ks7O3clczA&usqp=CAU',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHNXHJ0ALau4F9SrHn-FxYEzpoUtpHrh7pZw&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrEBkGmw7Ryxq6Ww2Uvpu5hsHSll818_AGmA&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRC57mYmnDYx_FpmGdtJWlJREJnOGWkWnz3A&usqp=CAU'
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWNN8JIli0PpbTsDiPAUbuYsiGM835OhM8vg&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfzj2GnKV980b_ldLenIVmUiU_9O9Hs7AgTg&usqp=CAU'
   ];
 
   @override
@@ -42,12 +46,20 @@ class _HomeState extends State<Home> {
             child: Text('Product  List',
                 style: TextStyle(fontWeight: FontWeight.bold))),
         actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Cart()));
-              },
-              icon: const Icon(Icons.shopping_cart))
+      Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: badges.Badge(
+        badgeContent: Text(context.watch<CartProvider>().cart.length.toString()),
+
+            child:IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Cart()));
+                },
+                icon: const Icon(Icons.shopping_cart))),
+      ),
+
+
+
         ],
       ),
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -98,10 +110,12 @@ class _HomeState extends State<Home> {
                             alignment: Alignment.centerRight,
                             child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(
+                                  context.read<CartProvider>().addCart(
                                       context,
-                                      MaterialPageRoute(
-                                          builder: (context) => const Cart()));
+                                      ProductImages[index].toString(),
+                                      ProductName[index].toString(),
+                                      ProductPrice[index].toString(),
+                                      ProductWeight[index].toString());
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor:
