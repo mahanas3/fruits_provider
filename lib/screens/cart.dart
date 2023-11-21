@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 class Cart extends StatefulWidget {
   Cart({super.key,});
 
-  //List<Map<String, dynamic>> cartdata;
 
   @override
   State<Cart> createState() => _CartState();

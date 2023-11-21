@@ -16,10 +16,4 @@ class CartProvider extends ChangeNotifier {
                 )));
     notifyListeners();
   }
-
-
-
-  void notification(){
-
-  }
 }

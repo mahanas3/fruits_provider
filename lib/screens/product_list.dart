@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_provider/screens/cartProvider.dart';
 import 'package:provider/provider.dart';
-import 'package:badges/badges.dart' as  badges;
+import 'package:badges/badges.dart' as badges;
 
 import 'cart.dart';
 
@@ -46,20 +46,18 @@ class _ProductListState extends State<ProductList> {
             child: Text('Product  List',
                 style: TextStyle(fontWeight: FontWeight.bold))),
         actions: [
-      Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: badges.Badge(
-        badgeContent: Text(context.watch<CartProvider>().cart.length.toString()),
-
-            child:IconButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Cart()));
-                },
-                icon: const Icon(Icons.shopping_cart))),
-      ),
-
-
-
+          Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: badges.Badge(
+                badgeContent:
+                    Text(context.watch<CartProvider>().cart.length.toString()),
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Cart()));
+                    },
+                    icon: const Icon(Icons.shopping_cart))),
+          ),
         ],
       ),
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
