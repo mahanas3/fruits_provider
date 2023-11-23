@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fruits_provider/screens/cartProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart' as badges;
-
 import 'cart.dart';
 
 class ProductList extends StatefulWidget {
